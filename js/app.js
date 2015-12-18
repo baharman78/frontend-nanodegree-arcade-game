@@ -7,8 +7,6 @@ var Enemy = function(x, y) {
     // a helper we've provided to easily load images
     this.x = x;//101*x;
     this.y = 83*y-20;
-    this.gridX = 101*x;
-    this.gridY = y;
     this.player = 0;
     this.sprite = 'images/enemy-bug.png';
 };
@@ -17,8 +15,6 @@ var Player = function(x, y) {
   Enemy.call(this, x, y);
   this.x = 101*x;
   this.y = 80*y-20;
-  this.gridX = x;
-  this.gridY = y;
   this.player = 1;
   this.sprite = "images/char-boy.png";
 };
@@ -52,8 +48,25 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-Player.prototype.handleInput = function(){
 
+
+Player.prototype.handleInput = function(key){
+  if(key === "left" && this.x > 0){
+  //  console.log("left");
+  this.x = this.x - 101;
+  }
+  else if(key === "right" && this.x < 4*101){
+  //  console.log("right");
+  this.x = this.x + 101;
+  }
+  else if(key === "up" && this.y > 0){
+  //  console.log("up");
+  this.y = this.y - 80;
+  }
+  else if(key === "down" && this.y < 80*4){
+  //  console.log("down");
+  this.y = this.y + 80;
+  }
 };
 
 // Now instantiate your objects.
