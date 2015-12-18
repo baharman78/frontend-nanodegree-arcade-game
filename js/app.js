@@ -1,21 +1,25 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, spd) {
+var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.x = 101*x;
+    this.x = x;//101*x;
     this.y = 83*y-20;
+    this.gridX = 101*x;
+    this.gridY = y;
+    this.player = 0;
     this.sprite = 'images/enemy-bug.png';
-    this.dt = spd;
 };
 
 var Player = function(x, y) {
-  var dt = 1;
-  Enemy.call(this, x, y, dt);
+  Enemy.call(this, x, y);
   this.x = 101*x;
   this.y = 80*y-20;
+  this.gridX = x;
+  this.gridY = y;
+  this.player = 1;
   this.sprite = "images/char-boy.png";
 };
 
@@ -25,7 +29,15 @@ Player.prototype.contstructor = Player;
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-
+    if(this.player === 0){
+      if(this.x > 503){
+        this.x = -98;
+      }
+      else{
+        this.x = this.x + 100*dt;
+      }
+    }
+    //console.log(dt);
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -48,7 +60,7 @@ Player.prototype.handleInput = function(){
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 for(var i = 1; i < 4 ; i++){
-  allEnemies.push(new Enemy(0, i, 0));
+  allEnemies.push(new Enemy(0, i));
 }
 //var allEnemies = [new Enemy(0, 60, 0)];
 // Place the player object in a variable called player
