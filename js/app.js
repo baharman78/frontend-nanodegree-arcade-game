@@ -5,7 +5,7 @@ var Enemy = function(x, y) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.x = x;//101*x;
+    this.x = x;
     this.y = 83*y-20;
     this.player = 0;
     this.spd = mathRandomRange(200, 400);

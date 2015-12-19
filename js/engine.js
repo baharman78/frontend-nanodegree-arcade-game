@@ -81,6 +81,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        checkWinCondition();
     }
 
     /* This is called by the update function and loops through all of the
@@ -105,6 +106,12 @@ var Engine = (function(global) {
           (player.y-20 < allEnemies[i].y)){
           reset();
         }
+      }
+    }
+
+    function checkWinCondition() {
+      if(player.y === -20){
+        reset();
       }
     }
 
@@ -172,6 +179,7 @@ var Engine = (function(global) {
     function reset() {
         window.location.reload();
     }
+
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
