@@ -13,7 +13,6 @@ var Enemy = function(x, y) {
     //Enemy speed tells enemies how fast to progress across
     //screen with fluid movement
     this.spd = mathRandomRange(200, 400);
-    console.log(this.spd);
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -30,7 +29,6 @@ var Player = function(x, y) {
   this.spd = 1;
   this.sprite = "images/char-boy.png";
 };
-
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.contstructor = Player;
 
@@ -86,10 +84,8 @@ var allEnemies = [];
 for(var i = 1; i < 4 ; i++){
   allEnemies.push(new Enemy(26, i));
 }
-//var allEnemies = [new Enemy(0, 60, 0)];
 // Place the player object in a variable called player
 var player = new Player(0, 5);
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
