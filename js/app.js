@@ -7,7 +7,11 @@ var Enemy = function(x, y) {
     // a helper we've provided to easily load images
     this.x = x;
     this.y = 83*y-20;
+    //player flag is used to let update use logic based
+    //on whether Object is player or enemy
     this.player = 0;
+    //Enemy speed tells enemies how fast to progress across
+    //screen with fluid movement
     this.spd = mathRandomRange(200, 400);
     console.log(this.spd);
     this.sprite = 'images/enemy-bug.png';
@@ -17,7 +21,12 @@ var Player = function(x, y) {
   Enemy.call(this, x, y);
   this.x = 101*x;
   this.y = 80*y-20;
+  //player flag is used to let update use logic based
+  //on whether Object is player or enemy
   this.player = 1;
+  //player speed is based on grid movement
+  //ex. spd 2 moves two grids instead of 1 whenever key arrow
+  //  key is pressed
   this.spd = 1;
   this.sprite = "images/char-boy.png";
 };
@@ -58,19 +67,15 @@ var mathRandomRange = function(min, max){
 
 Player.prototype.handleInput = function(key){
   if(key === "left" && this.x > 0){
-  //  console.log("left");
   this.x = this.x - 101*this.spd;
   }
   else if(key === "right" && this.x < 4*101){
-  //  console.log("right");
   this.x = this.x + 101*this.spd;
   }
   else if(key === "up" && this.y > 0){
-  //  console.log("up");
   this.y = this.y - 80*this.spd;
   }
   else if(key === "down" && this.y < 80*4){
-  //  console.log("down");
   this.y = this.y + 80*this.spd;
   }
 };
