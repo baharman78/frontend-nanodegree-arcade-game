@@ -8,6 +8,8 @@ var Enemy = function(x, y) {
     this.x = x;//101*x;
     this.y = 83*y-20;
     this.player = 0;
+    this.spd = mathRandomRange(200, 400);
+    console.log(this.spd);
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -16,6 +18,7 @@ var Player = function(x, y) {
   this.x = 101*x;
   this.y = 80*y-20;
   this.player = 1;
+  this.spd = 1;
   this.sprite = "images/char-boy.png";
 };
 
@@ -28,9 +31,10 @@ Enemy.prototype.update = function(dt) {
     if(this.player === 0){
       if(this.x > 503){
         this.x = -98;
+        this.spd = mathRandomRange(200, 400);
       }
       else{
-        this.x = this.x + 100*dt;
+        this.x = this.x + this.spd*dt;
       }
     }
 
@@ -44,6 +48,10 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+
+var mathRandomRange = function(min, max){
+  return (max - min)*Math.random() + min;
+};
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -51,19 +59,19 @@ Enemy.prototype.render = function() {
 Player.prototype.handleInput = function(key){
   if(key === "left" && this.x > 0){
   //  console.log("left");
-  this.x = this.x - 101;
+  this.x = this.x - 101*this.spd;
   }
   else if(key === "right" && this.x < 4*101){
   //  console.log("right");
-  this.x = this.x + 101;
+  this.x = this.x + 101*this.spd;
   }
   else if(key === "up" && this.y > 0){
   //  console.log("up");
-  this.y = this.y - 80;
+  this.y = this.y - 80*this.spd;
   }
   else if(key === "down" && this.y < 80*4){
   //  console.log("down");
-  this.y = this.y + 80;
+  this.y = this.y + 80*this.spd;
   }
 };
 
