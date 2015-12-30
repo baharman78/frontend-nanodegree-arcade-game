@@ -78,9 +78,9 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
         checkCollisions();
         checkWinCondition();
+        updateEntities(dt);
     }
 
     /* This is called by the update function and loops through all of the
@@ -103,14 +103,16 @@ var Engine = (function(global) {
           (player.x-76 < allEnemies[i].x) &&
           (player.y+20 > allEnemies[i].y) &&
           (player.y-20 < allEnemies[i].y)){
-          reset();
+          resetPositions();
         }
       }
     }
 
     function checkWinCondition() {
       if(player.y === -20){
-        reset();
+        setTimeout(function(){
+          resetPositions();
+        }, 100);
       }
     }
 
@@ -175,16 +177,21 @@ var Engine = (function(global) {
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-    function reset() {
-      var num = 0;
-      while(setTimeout(function(){}) < 2000){
-        if(num === 0){
-          window.location.reload();
-          num++;
-        }
-      }
-    }
+     function reset() {
+       window.location.reload();
+     }
 
+     function resetPositions(){
+       // Modify enemies to  start at home location
+       for(var i = 1; i < 4 ; i++){
+         allEnemies[i-1].x = 26;
+         allEnemies[i-1].y = 83*i-20;
+       }
+
+       // Modify player to start at home location
+       player.x = 0;
+       player.y = 80*5-20;
+     }
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
