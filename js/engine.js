@@ -191,6 +191,8 @@ var Engine = (function(global) {
        // Modify player to start at home location
        player.x = 0;
        player.y = 80*5-20;
+
+       ctx.clearRect(0, 0, 505, 606);
      }
 
     /* Go ahead and load all of the images we know we're going to need to
